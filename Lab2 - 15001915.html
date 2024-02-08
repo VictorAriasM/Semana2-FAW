@@ -1,0 +1,156 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Laboratorio 2 - Victor Eduardo Arias Martínez</h2>
+    <h3>Carnet: 15001915</h3>
+
+    <div>
+        <h1>Ejercicio #1</h1>
+        <h3 id="Re1"></h3>
+        <input id="txtNum1" type="number" placeholder="Ingrese un número">
+        <span>^</span>
+        <input id="txtNum2" type="number" placeholder="Ingrese una potencia">
+        <button onclick="fEjercicio1()">Ejecutar</button>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #2</h1>
+        <h3 id="Re2"></h3>
+        <input id="txtCelcius" type="number" placeholder="Ingrese grados en celcius">
+        <button onclick="fEjercicio2()">Convertir</button>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #3</h1>
+        <h3 id="Re3">
+            <span>Listado</span>
+            <ul id="listaCompleta"></ul>
+            <span>= Longitud</span>
+            <ul id="listaFiltrada"></ul>
+        </h3>
+        <input id="txtNombres" type="text" placeholder="Ingrese un nombre">
+        <input id="txtCantidadFiltro" type="number" placeholder="Ingrese una longitud">
+        <button onclick="AgregarE3()">Agregar</button>
+        <button onclick="FiltrarE3()">Filtrar</button>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #4</h1>
+        <h3 id="Re4"></h3>
+        <label for="fecha">Fecha</label>
+        <input type="text" name="fecha" id="txtFecha" placeholder="YYYY-MM-DD">
+        <button onclick="CalcularE4()">Calcular años</button>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #5</h1>
+        <h3 id="Re5"></h3>
+        <input type="text" id="txtHilera" placeholder="Ingrese un texto...">
+        <button onclick="CalcularE5()">Calcular palabras</button>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #6</h1>
+        <h3 id="Re6"></h3>
+        <label for="numero">Numeros</label>
+        <input type="number" name="numero" id="txtNumeroE6" placeholder="Ingrese un Número">
+        <button onclick="AgregarE6()">Agregar número a lista</button>
+        <button onclick="CalcularE6()">Calcular promedio</button>
+        <ul id="listaNumeros"></ul>
+    </div>
+    <br>
+    <div>
+        <h1>Ejercicio #7</h1>
+        <h3 id="Re7" style="width: 200px; height: 200px"></h3>
+        <label for="color">Color</label>
+        <input type="text" name="color" id="txtColor" placeholder="#000000">
+        <button onclick="AgregarE7()">Mostrar color</button>
+    </div>
+    <br>
+</body>
+
+<script type="text/javascript">
+    var nombres = [];
+    var numeros = [];
+
+
+    function fEjercicio1() {
+        document.getElementById("Re1").innerHTML = "Resultado = " + document.getElementById("txtNum1").value ** document.getElementById("txtNum2").value
+    }
+
+    function fEjercicio2() {
+        document.getElementById("Re2").innerHTML = "Farenheit = " + (document.getElementById("txtCelcius").value * 9 / 5) + 32;
+    }
+
+    function AgregarE3() {
+        nombres.push(document.getElementById("txtNombres").value);
+        document.getElementById('listaCompleta').innerHTML = "";
+        nombres.forEach(nomb => {
+            ulpadre = document.getElementById('listaCompleta')
+            newli = document.createElement('li')
+            newli.innerHTML = nomb;
+            ulpadre.appendChild(newli);
+        });
+    }
+
+    function FiltrarE3() {
+        var longitud = document.getElementById('txtCantidadFiltro').value;
+        document.getElementById('listaFiltrada').innerHTML = "";
+        nombres.forEach(nomb => {
+            if (nomb.length == longitud) {
+                ulpadre = document.getElementById('listaFiltrada')
+                newli = document.createElement('li')
+                newli.innerHTML = nomb;
+                ulpadre.appendChild(newli);
+            }
+        });
+    }
+
+    function CalcularE4(){
+        var fecha = new Date(document.getElementById("txtFecha").value);
+        var hoy = new Date();
+        var diferencia = hoy - fecha;
+        var edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365));
+        document.getElementById("Re4").innerHTML = edad;
+    }
+
+    function CalcularE5(){
+            var input = document.getElementById("txtHilera").value;
+
+            var palabras = input.split(' ').length;
+            document.getElementById("Re5").innerHTML = "la hilera tiene " + palabras + " palabras";
+    }
+
+    function AgregarE6() {
+        numeros.push(document.getElementById("txtNumeroE6").value);
+        document.getElementById('listaNumeros').innerHTML = "";
+        numeros.forEach(num => {
+            ulpadre = document.getElementById('listaNumeros')
+            newli = document.createElement('li')
+            newli.innerHTML = num;
+            ulpadre.appendChild(newli);
+        });
+    }
+
+    function CalcularE6(){
+            var suma = numeros.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            var promedio = suma / numeros.length;
+            document.getElementById("Re6").innerHTML = "El promedio es " + promedio;
+    }
+
+    function AgregarE7(){
+            var input = document.getElementById("txtColor")
+            var resultado = document.getElementById("Re7");
+            resultado.style.backgroundColor = input.value;
+    }
+
+
+</script>
+
+</html>
